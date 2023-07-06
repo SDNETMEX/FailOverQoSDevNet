@@ -1,0 +1,27 @@
+.alert {
+  padding: 7px;
+  width:100%
+  border-radius: 3px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.alert-danger {
+  display: block;
+  background-color: #f87961;
+  color: white;
+}
+
+.alert-warning {
+  display: block;
+  background-color: #F4A460;
+  color: white;
+}
+
+.alert-success {
+  display: block;
+  background-color: #a5ce78;
+  color: white;
+}

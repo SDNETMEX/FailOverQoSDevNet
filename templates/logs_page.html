@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Megacable</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../static/dest/images/icons/favicon.ico">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet"  href="../static/dest/css/util.css">
+	<link rel="stylesheet"  href="../static/dest/css/main.css">
+<!--===============================================================================================-->
+<!--Sirve para los mensajes flash-->
+<link rel="stylesheet" href="..\static\dest\css\flashmsg.css">
+
+<!--Sirve para la animación de cargando-->
+<link rel="stylesheet" href="..\static\dest\css\loading.css">
+	
+<!--Glyphicon-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" action="{{ url_for('filter_logs') }}" method="POST">
+				
+				<span class="contact100-form-title">
+					<img src="../static/dest/images/logo.png" style="float:left" onclick="location.href='{{ url_for('menu_principal') }}'"/>
+					Devices Logs
+				</span>
+
+                
+				<span class="label-input100">{{error}}</span>
+				
+				{% for category, message in get_flashed_messages(with_categories=True) %}
+				<span class="input100">
+					<div class = "alert alert-{{category}}">{{ message }}</div>
+				</span>
+				{% endfor %}
+
+				
+				<br><br><br><br>
+				
+				<div class="wrap-input100  bg1"  id="fecha_hora">
+					    <span class="label-input100">Fecha y hora</span>
+						{% if fecha_hora %}
+							<input class="input100"  type="datetime-local" name="fecha_hora" value="{{fecha_hora}}">
+
+						{% else %}
+							<input class="input100"  type="datetime-local" name="fecha_hora">
+
+						{% endif %}
+
+
+				</div>
+								
+				<div class="container-contact100-form-btn" id = "id_filter">
+					<button class="contact100-form-btn" name="submit_button" value="buscar_puertos_disponibles">
+						<span>
+							Filtrar
+							<i aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+				
+				<br><br><br><br>
+				
+				<div>
+					<table class="table table-bordered" style="border:2px solid #DDD!important;">
+						<tbody>
+							<tr style="border:2px solid #808080!important;">
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-7">
+											<div class="form-group">
+												<label class="col-md-11"><b>Fecha</b></label>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-9">
+											<div class="form-group">
+												<label class="col-md-11"><b>Device</b></label>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-7">
+											<div class="form-group">
+												<label class="col-md-11"><b>Queue</b></label>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-7">
+											<div class="form-group">
+												<label class="col-md-11"><b>Movimiento</b></label>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							{% for key,opcion in logs.items() %}
+							<tr class= "campos_list" style="border:2px solid #808080!important;">
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-5">
+											<div class="form-group">
+												<div class="col-md-7">
+													<a class="permit_seq"
+														title=""><b>{{ key }}</b></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="col-md-12">
+													{{ logs[key][0] }}
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="col-md-12">
+													{{ logs[key][1] }}
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="col-md-12">
+													{{ logs[key][2] }}
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+				
+				<!--div para el modal con la animación de loading-->
+				<div class="modal fade" id="LoadingModal" role="dialog">
+					<div class="modal-dialog modal-sm">
+
+					  <!-- Modal content-->
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h4 class="modal-title">Loading</h4>
+						</div>
+						<div class="modal-body">
+						  <div class="lds-roller" id="loadmod" style="display:inline-block"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+						</div>
+					  </div>
+
+					</div>
+				</div>
+				<!--Aquí termina el modal con la animación de loading-->
+				
+			</form>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/dest/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/select2/select2.min.js"></script>
+	<script type="text/javascript">
+		function Muestra_dry_run(){
+			$('#commit_dry_run').empty();
+			var opcion_seleccionada = document.getElementById('id_servicio').value;
+			if (opcion_seleccionada == "Seleccione una opcion") {
+				document.getElementById('commit_alt_cam').style.display = 'none';
+			}else{
+				document.getElementById('commit_alt_cam').style.display = 'block';
+				$.ajax({
+					url: 'http://'+ ip_ser +':5000/api/service-dryrun/' + $("#id_servicio option:selected").val(),
+					type: "GET",
+					headers: { 'Accept': 'application/yang-data+json'},
+					success: function(data){
+						document.getElementById('commit_dry_run').innerHTML=data;
+					}
+				});
+			}
+		}
+	</script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/dest/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/noui/nouislider.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/js/const_var.js"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+	<script>
+	function LogOut() {
+	  window.location.href ='{{ url_for('index') }}'
+	  <!--window.location.href = "Login.html";-->
+	}
+	</script>
+
+<!--===============================================================================================-->
+	<script src="../static/dest/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

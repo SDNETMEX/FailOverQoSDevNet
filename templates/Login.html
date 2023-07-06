@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../static/dest2/images/icons/favicon.ico">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest2/vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet"  href="../static/dest2/css/util.css">
+	<link rel="stylesheet"  href="../static/dest2/css/main.css">
+<!--===============================================================================================-->
+<!--Sirve para los mensajes flash-->
+<link rel="stylesheet" href="..\static\dest\css\flashmsg.css">
+<script src="../static/dest/bin/jsencrypt.min.js"></script>
+
+</head>
+<body style="background-color: #666666;">
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" name = "form" action="{{ url_for('login') }}" method="POST" id="form">
+					<span class="login100-form-title p-b-43">
+						Interface Fail Over y QoS
+					</span>
+
+					{% for category, message in get_flashed_messages(with_categories=True) %}
+					<span class="input100">
+						<div class = "alert alert-{{category}}">{{ message }}</div>
+					</span>
+					{% endfor %}
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="user">
+						<span class="focus-input100"></span>
+						<span class="label-input100">User</span>
+					</div>
+
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password" id="password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Password</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button
+						  class="login100-form-btn"
+						  id="btn_login"
+						  type="button"
+						  onclick="encrypt_password()"
+						>
+						  Login
+						</button>
+					</div>
+				</form>
+
+				<div class="login100-more" style="background-image: url('../static/dest2/images/net3-mod.jpg');">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/dest2/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/select2/select2.min.js"></script>
+	<script src="../static/dest2/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/dest2/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="../static/dest2/vendor/countdowntime/countdowntime.js"></script>
+	<script src="../static/dest2/js/main.js"></script>
+	<SCRIPT>
+	function go(){
+	var input_pass = document.form.password.value;
+      
+	if (input_pass=='PASS' && document.form.login.value=='USUARIO'){ 
+			
+			document.form.submit(); 
+		} 
+		else{ 
+			 alert("Porfavor ingrese, nombre de usuario y contraseña correctos."); 
+		} 
+	} 
+	</SCRIPT>
+	<script type="text/javascript">
+		function encrypt_password() {
+		  var encrypt = new JSEncrypt();
+		  encrypt.setPublicKey($("#pubkey").val());
+		  var encrypted = encrypt.encrypt($("#password").val());
+  
+		  document.getElementById("password").value = encrypted;
+  
+		  $("#form").submit();
+		}
+	  </script>
+	<!--script>
+		document.getElementById("btn_login").addEventListener("click", function(event){
+			var input_pass = document.form.password.value;
+			var input_user = document.form.login.value;
+			console.log(input_pass);
+			if (input_pass=='admin' && input_user=='admin'){ 
+				//document.form.submit(); 
+			}else{ 
+				alert("Porfavor ingrese, nombre de usuario y contraseña correctos.");
+				event.preventDefault();
+			} 
+		});
+	</script-->
+	<textarea id="pubkey" rows="15" cols="65" style="display: none">
+		-----BEGIN PUBLIC KEY-----
+			  MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAVUjI/IT/4c9vhb4gPW/mIQQBgraEty8E
+			  fYDvlkVN4iC6Wb8AZBnHR8x+CQ3Qr7tHTAhRRubyHWZJD6ru5fZiGQIDAQAB
+			  -----END PUBLIC KEY-----</textarea
+    >
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/dest2/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/vendor/noui/nouislider.min.js"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+<!--===============================================================================================-->
+	<script src="../static/dest2/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

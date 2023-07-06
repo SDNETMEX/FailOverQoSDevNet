@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Megacable</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../static/dest/images/icons/favicon.ico">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/dest/vendor/noui/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet"  href="../static/dest/css/util.css">
+	<link rel="stylesheet"  href="../static/dest/css/main.css">
+<!--===============================================================================================-->
+<!--Sirve para los mensajes flash-->
+<link rel="stylesheet" href="..\static\dest\css\flashmsg.css">
+
+<!--Sirve para la animación de cargando-->
+<link rel="stylesheet" href="..\static\dest\css\loading.css">
+</head>
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" action="{{ url_for('changes_user') }}" method="POST">
+				
+				<span class="contact100-form-title">
+					<img src="../static/dest/images/logo.png" style="float:left" onclick="location.href='{{ url_for('menu_principal') }}'"/>
+					Manage Users
+				</span>
+
+                
+				<span class="label-input100">{{error}}</span>
+				
+				{% for category, message in get_flashed_messages(with_categories=True) %}
+				<span class="input100">
+					<div class = "alert alert-{{category}}">{{ message }}</div>
+				</span>
+				{% endfor %}
+				
+				<div class="wrap-input100">
+					<table class="table table-bordered" style="border:2px solid #DDD!important;">
+						<tbody>
+							<tr style="border:2px solid #808080!important;">
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="col-md-11"><b>Users</b></label>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							{% for user in users["Users"] %}
+							<tr class= "campos_list" style="border:2px solid #808080!important;">
+								<td style="border:2px solid #808080!important;">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="col-md-7">
+													<a class="permit_seq"
+														title=""><b>{{ user }}</b></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Accion</span>
+					
+					<select class="js-select2" id="accion" name="name_service">
+					
+						<option>Agregar</option>
+						<option>Modificar</option>
+						<option>Eliminar</option>
+					
+					</select>
+					<div class="dropDownSelect2"></div>
+				</div>
+				
+				<div  id="user" class="wrap-input100 bg1 rs1-wrap-input100" style="display:none">
+					<span class="label-input100">Nombre del Usuario</span>
+					
+					<select class="js-select2"name="sel_user">
+					
+						<option>Seleccione un Usuario</option>
+						{% for x in  users["Users"] %}
+								<option value="{{x}}" >{{x}}</option>
+					    {% endfor %}
+					
+					</select>
+					<div class="dropDownSelect2"></div>
+				</div>
+				
+				<div id="id_nom_user" class="wrap-input100 bg1 rs1-wrap-input100">
+					<span class="label-input100">Nombre Usuario</span>
+					<input class="input100" name="nombre_user" placeholder="Nombre Usuario"></input>
+					<div class="dropDownSelect2"></div>
+				</div>
+				
+				<div class="container-contact100-form-btn bg1" id = "button_agregar">
+					<button class="contact100-form-btn" name="submit_button" value="Aceptar">
+						<span>
+							Aceptar
+							<i aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+				
+				
+				<br><br><br><br>
+				
+				<!--div para el modal con la animación de loading-->
+				<div class="modal fade" id="LoadingModal" role="dialog">
+					<div class="modal-dialog modal-sm">
+
+					  <!-- Modal content-->
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h4 class="modal-title">Loading</h4>
+						</div>
+						<div class="modal-body">
+						  <div class="lds-roller" id="loadmod" style="display:inline-block"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+						</div>
+					  </div>
+
+					</div>
+				</div>
+				<!--Aquí termina el modal con la animación de loading-->
+				
+			</form>
+		</div>
+	</div>
+
+
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/dest/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					
+				});
+			});
+		})
+	</script>
+	<script>
+    $(document).ready(function(){
+        $('#accion').change(function() {
+			var accion = $("#accion option:selected").val()
+			if (accion=="Agregar"){
+				document.getElementById('user').style.display = 'none';
+				document.getElementById('id_nom_user').style.display = 'block';
+			}else if (accion=="Modificar"){
+				document.getElementById('user').style.display = 'block';
+				document.getElementById('id_nom_user').style.display = 'block';
+			}else{
+				document.getElementById('user').style.display = 'block';
+				document.getElementById('id_nom_user').style.display = 'none';
+			}
+
+		});
+	});
+	</script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/dest/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/vendor/noui/nouislider.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/dest/js/const_var.js"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+	<script>
+	function LogOut() {
+	  window.location.href ='{{ url_for('index') }}'
+	  <!--window.location.href = "Login.html";-->
+	}
+	</script>
+
+<!--===============================================================================================-->
+	<script src="../static/dest/js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
