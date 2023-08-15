@@ -135,6 +135,6 @@ python3 mainfoqos.py
 Finally, you can access web development as follows:
 
 ```bash
-x.x.x.x:flask_port
+x.x.x.x:80
 ```
 ----
