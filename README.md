@@ -1,4 +1,4 @@
-# FailOver and QoS Automation
+# Automate QoS adjustment
 
 A collection of Python Code Samples to automate the QoS queue adjustment in Cisco routers running IOS XR. This development includes the use of CISCO EPN-M's APIs to detect drops in the configured priority queues of the routers and CISCO NSO's APIs to send and validate the changes to the network, depending on the thresholds configured by the customer.
 
