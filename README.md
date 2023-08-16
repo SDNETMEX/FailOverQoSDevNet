@@ -138,3 +138,6 @@ Finally, you can access web development as follows:
 x.x.x.x:80
 ```
 ----
+
+
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/SDNETMEX/FailOverQoSDevNet)-
