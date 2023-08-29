@@ -31,37 +31,6 @@ When a vulnerability report is received:
 
 We would like to thank the security researchers and users who help us keep this project safe. Your contributions are invaluable.
 
-------------------------------------------------------------------------------------------------------------
-                                        *Version en espanol*
-------------------------------------------------------------------------------------------------------------
-# Política de Seguridad
-
-## Versiones con soporte
-
-| Versión | Soportada           |
-| ------- | ------------------  |
-| 1.0.x   | :white_check_mark: |
-
-## Reportar una Vulnerabilidad
-
-Si descubres una vulnerabilidad de seguridad en este proyecto, por favor sigue estos pasos para reportarla:
-
-1. **No** abras un problema en GitHub para la vulnerabilidad.
-2. Envíanos un correo electrónico a soporte@sdnet.com.mx con los detalles sobre la vulnerabilidad.
-3. Incluye una descripción del problema de seguridad y cualquier paso necesario para reproducirlo.
-4. Nuestro equipo de seguridad revisará tu reporte y te responderá lo mas pronto posible con los próximos pasos a seguir.
-
-## Proceso de Divulgación
-
-Cuando recibimos un reporte de vulnerabilidad:
-
-- Nuestro equipo de seguridad confirmará la recepción de tu correo electrónico en un plazo de 48 horas.
-- Nuestro equipo trabajará en evaluar la gravedad y validez de la vulnerabilidad.
-- Podríamos contactarte para obtener más detalles, si es necesario.
-- Una vez que la vulnerabilidad haya sido confirmada y solucionada, crearemos un parche de seguridad.
-- El parche será aplicado a las versiones soportadas del proyecto.
-- Publicaremos las versiones parcheadas y proporcionaremos información sobre la vulnerabilidad y la solución en nuestras notas de lanzamiento.
-
 ## Reconocimientos
 
 Deseamos agradecer a los investigadores de seguridad y usuarios que nos ayudan a mantener este proyecto seguro. Tus contribuciones son invaluables.
