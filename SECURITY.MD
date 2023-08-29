@@ -30,7 +30,3 @@ When a vulnerability report is received:
 ## Acknowledgments
 
 We would like to thank the security researchers and users who help us keep this project safe. Your contributions are invaluable.
-
-## Reconocimientos
-
-Deseamos agradecer a los investigadores de seguridad y usuarios que nos ayudan a mantener este proyecto seguro. Tus contribuciones son invaluables.
